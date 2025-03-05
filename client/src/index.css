@@ -1,15 +1,64 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: theme('colors.primary.600');
+    --color-primary-dark: theme('colors.primary.400');
+    --color-bg: theme('colors.gray.50');
+    --color-bg-dark: theme('colors.dark.DEFAULT');
+    --color-text: theme('colors.gray.900');
+    --color-text-dark: theme('colors.dark.primary');
+  }
+
+  * {
+    @apply transition-colors duration-200;
+  }
+
   body {
-    @apply bg-gray-50;
+    @apply bg-gray-50 dark:bg-dark-DEFAULT text-gray-900 dark:text-dark-primary antialiased;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors;
+    @apply bg-primary-600 dark:bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
   }
+
+  .card {
+    @apply bg-white dark:bg-dark-card rounded-lg shadow-md transition-all duration-200 hover:shadow-lg;
+  }
+
+  .input {
+    @apply bg-white dark:bg-dark-paper border border-gray-200 dark:border-dark-DEFAULT rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 transition-all duration-200;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-in;
 }
